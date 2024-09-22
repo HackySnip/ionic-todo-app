@@ -1,0 +1,20 @@
+<ion-content>
+  <ion-item>
+    <ion-input [(ngModel)]="inputValue" placeholder="Enter something" (keydown.enter)="onEnter()"></ion-input>
+  </ion-item>
+
+  <div *ngFor="let card of cardTexts; let i = index">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title *ngIf="!card.isEditing">{{ card.text }}</ion-card-title>
+        <ion-item *ngIf="card.isEditing">
+          <ion-input [(ngModel)]="card.text" (keydown.enter)="saveEdit(i)"></ion-input>
+        </ion-item>
+        <ion-button fill="clear" (click)="toggleEdit(i)">
+          {{ card.isEditing ? 'Save' : 'Edit' }}
+        </ion-button>
+        <ion-button fill="clear" (click)="deleteCard(i)">Delete</ion-button>
+      </ion-card-header>
+    </ion-card>
+  </div>
+</ion-content>
